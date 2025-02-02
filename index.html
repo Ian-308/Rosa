@@ -5,7 +5,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Un ramo para ti</title>
+    
     <style>
+
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&display=swap');
+
+#titulo {
+    font-family: 'Dancing Script', cursive; /* Fuente elegante */
+    font-size: 2.5rem; /* Tamaño grande */
+    color: #ffffff; /* Color coral */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra de texto */
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 20%; /* Posición más arriba */
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+#titulo.hidden {
+    opacity: 0;
+    transform: translate(-50%, -60%); /* Efecto de desvanecimiento hacia arriba */
+}
+
+/* Animación de brillo */
+@keyframes glow {
+    0% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 10px #fdfdfd, 0 0 20px #ffffff, 0 0 30px #ff6f61;
+    }
+    100% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+}
+
+#titulo {
+    animation: glow 3s infinite alternate; /* Aplica la animación de brillo */
+}
+
         body {
             height: 100vh;
             width: 100%;
@@ -375,7 +417,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
-            transition: opacity 2s ease;
+            transition: opacity var(--duration) ease;
         }
 
         .texto p.visible {
@@ -384,13 +426,13 @@
         }
 
         .container.difuminar {
-            opacity: 0.2;
+            opacity: 1;
             filter: blur(4px);
             transition: opacity 4s ease, filter 4s ease;
         }
 
         .petals.active>div:nth-child(2) {
-            animation: bloom2 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+            animation: bloom2 20s ease-in-out, glowing 1.5s ease-in-out infinite;
             animation-fill-mode: forwards;
         }
 
@@ -559,20 +601,22 @@
       </div>
   </div>
   <div class="texto" id="texto">
-    <h4 id="titulo">Tu eres mi rosa eterna</h4> <!-- Agregué un id al título -->
-      <p>Tú eres mi rosa eterna</p>
-      <p>Siempre te he dado rosa, pero jamás te he dicho qué significa para mí.</p>
-      <p>Para mí, se representa mi amor por ti.</p>
-      <p>Así como nace una rosa, sin darme cuenta, fue creciendo, tuvo sus altibajos, pero siempre estuvo ahí.</p>
-      <p>Siempre creí que ya se había marchitado ese amor que tengo por ti, pues ya no creía que reviviría, pero me equivoqué.</p>
-      <p>Tuvo que pasar muchas cosas, esa rosa nunca le dio el sol ni mucho menos le eché agua, pero ahí estaba.</p>
-      <p>Pero nunca se rindió, pasaron huracanes, pasaron días soleados, pero ella ahí seguía.</p>
-      <p>Hasta que un día alguien llegó a reanimarla y decirle: “Ya llegué, ya estoy aquí”, con un beso que hizo volver a recordar ese primer beso, esa primera caricia que me diste.</p>
-      <p>Con ese beso, volvió a revivir esa rosa, que es el amor que tengo por ti.</p> 
-      <p>Y es por eso eres mi rosa eterna, mi amor eterno.</p>
-      <p>Te quiero mucho</p>
-      <p>Mi ardillita</p>
-  </div>
+    <h4 id="titulo">Tú eres mi rosa eterna</h4>
+    <p data-delay="17" data-duration="5">Tú eres mi rosa eterna.</p>
+    <p data-delay="2" data-duration="6">Siempre te he regalado rosas, pero nunca te he dicho lo que significan.</p>
+    <p data-delay="2" data-duration="6">Para mí, son el símbolo de mi amor por ti.</p>
+    <p data-delay="2" data-duration="8">Como una rosa que nace en silencio, mi amor creció sin que yo lo notara. Tuvo momentos de luz y sombra, pero siempre permaneció firme.</p>
+    <p data-delay="4" data-duration="8">Pensé que se había marchitado con el pasar de los años, que ya no había esperanza.</p>
+    <p data-delay="4" data-duration="7">Esa rosa no siempre tuvo sol ni agua, pero nunca desapareció.</p>
+    <p data-delay="4" data-duration="8">Resistió huracanes, días soleados y noches frías. Y ahí seguía, esperando.</p>
+    <p data-delay="12" data-duration="10">Hasta que llegaste tú. Con tu mirada que penetra mi alma y tu voz que calma mis pensamientos.</p>
+    <p data-delay="4" data-duration="10">Con un beso tan inesperado, tan repentino, le devolviste la vida a esa rosa, a ese amor que creí perdido.</p>
+    <p data-delay="4" data-duration="8">Ese beso hizo florecer de nuevo mi amor por ti, desde las cenizas donde pensé que no quedaba nada.</p>
+    <p data-delay="4" data-duration="10">Me hiciste recordar aquel primer beso, aquella primera caricia, el día en que te conocí y me enamoré.</p>
+    <p data-delay="4" data-duration="7">Entendí que ese amor, como una rosa bien plantada, que nunca se rindió. Siempre estuvo ahí, esperándote.</p>
+    <p data-delay="4" data-duration="6">Por eso eres mi rosa eterna, mi amor infinito.</p>
+    <p data-delay="2" data-duration="15">Mi ardillita.</p>
+</div>
 
   <audio id="audio" preload="auto">
     <source src="Broche_de_oro.mp3" type="audio/mp3">
@@ -588,36 +632,47 @@
       const paragraphs = texto.querySelectorAll('p');
 
       document.addEventListener('click', () => {
-          petals.classList.add('active');
-          container.classList.add('difuminar');
-          audio.play();
+    petals.classList.add('active');
+    container.classList.add('difuminar');
+    audio.play();
 
-          // Oculta el título
-    titulo.classList.add('hidden');
-
-
-
-    
-           // Espera 1 segundo antes de mostrar los párrafos
+    // Oculta el título después de 3 segundos
     setTimeout(() => {
-        let index = 0;
-        const showNextParagraph = () => {
-            if (index < paragraphs.length) {
-                paragraphs.forEach((paragraph, i) => {
-                    if (i === index) {
-                        paragraph.classList.add('visible');
-                    } else {
-                        paragraph.classList.remove('visible');
-                    }
-                });
-                index++;
-                setTimeout(showNextParagraph, 7000); // 2000ms (2 segundos) de retraso entre cada párrafo
-            }
-        };
+        titulo.classList.add('hidden');
+    }, 17000);
 
-        showNextParagraph();
-    }, 1000); // Espera 1 segundo antes de empezar a mostrar los párrafos
+    // Muestra los párrafos con retrasos y duraciones personalizadas
+    const paragraphs = document.querySelectorAll('.texto p');
+    let index = 0;
+
+    const showNextParagraph = () => {
+        if (index < paragraphs.length) {
+            // Oculta el párrafo anterior (si existe)
+            if (index > 0) {
+                paragraphs[index - 1].classList.remove('visible');
+            }
+
+            // Muestra el párrafo actual
+            const paragraph = paragraphs[index];
+            const delay = parseFloat(paragraph.getAttribute('data-delay')) * 1000; // Convierte a milisegundos
+            const duration = parseFloat(paragraph.getAttribute('data-duration')); // Duración en segundos
+
+            // Aplica la duración de la transición
+            paragraph.style.setProperty('--duration', `${duration}s`);
+
+            // Muestra el párrafo después del retraso
+            setTimeout(() => {
+                paragraph.classList.add('visible');
+            }, delay + 3000); // Suma 3 segundos para esperar a que el título desaparezca
+
+            index++;
+            setTimeout(showNextParagraph, delay + 3000 + (duration * 1000)); // Espera el retraso + la duración antes de mostrar el siguiente
+        }
+    };
+
+    showNextParagraph();
 });
+       
   </script>
 </body>
 
